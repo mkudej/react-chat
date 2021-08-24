@@ -1,52 +1,50 @@
+/* eslint-disable no-unused-vars */
 import classNames from "classnames";
+import { ErrorMessage, Field, FieldAttributes } from "formik";
 import { ReactElement } from "react";
 import { IconType } from "react-icons/lib";
 
 interface InputProps {
-  name: string;
-  placeholder: string;
-  type: string;
-  value: string;
-  onChange: (e: any) => void;
   icon?: ReactElement<IconType>;
-  error?: any;
 }
 
-export default function Input({
-  name,
-  placeholder,
-  type,
-  icon,
-  value,
-  error,
-  onChange,
-}: InputProps) {
+export default function Input(props: InputProps & FieldAttributes<any>) {
   return (
     <>
       <div
         className={classNames(
-          "border-border-color border rounded-lg py-2.5 px-4 w-full flex items-center",
-          {
-            "rounded-b-none border-red": error,
-            "mb-4": !error,
-          }
+          "flex",
+          "w-full",
+          "items-center",
+          "px-4",
+          "py-2.5",
+          "mb-4",
+          "border",
+          "border-border-color",
+          "rounded-lg"
         )}
       >
-        {icon && icon}
-        <input
-          name={name}
-          className="outline-none"
-          type={type}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
+        {props.icon && props.icon}
+        <Field
+          className="w-full outline-none"
+          name={props.name}
+          type={props.type}
         />
       </div>
-      {error ? (
-        <div className="border-red border border-t-0 rounded-lg rounded-t-none py-2 px-4 mb-4 w-full flex items-center text-red text-sm">
-          {error}
-        </div>
-      ) : null}
+      <ErrorMessage
+        component="div"
+        className={classNames(
+          "flex",
+          "w-full",
+          "items-center",
+          "-mt-3",
+          "mb-4",
+          "px-1",
+          "text-red",
+          "text-sm"
+        )}
+        name={props.name}
+      />
     </>
   );
 }
