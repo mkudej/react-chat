@@ -1,50 +1,41 @@
-/* eslint-disable no-unused-vars */
 import classNames from "classnames";
-import { ErrorMessage, Field, FieldAttributes } from "formik";
-import { ReactElement } from "react";
-import { IconType } from "react-icons/lib";
-
+import { Field, FormikErrors, FormikTouched, useFormikContext } from "formik";
 interface InputProps {
-  icon?: ReactElement<IconType>;
+  name: string;
+  label: string;
+  type: string;
+  className?: string;
 }
 
-export default function Input(props: InputProps & FieldAttributes<any>) {
+export default function Input(props: InputProps) {
+  const {
+    touched,
+    errors,
+  }: {
+    touched: FormikTouched<{ [field: string]: any }>;
+    errors: FormikErrors<{ [field: string]: any }>;
+  } = useFormikContext();
+
+  const error =
+    touched[props.name] && errors[props.name] ? errors[props.name] : null;
+
   return (
-    <>
-      <div
-        className={classNames(
-          "flex",
-          "w-full",
-          "items-center",
-          "px-4",
-          "py-2.5",
-          "mb-4",
-          "border",
-          "border-border-color",
-          "rounded-lg"
-        )}
+    <div className={props.className}>
+      <label
+        className={classNames("block mb-2 text-xs", { "text-red": error })}
+        htmlFor={props.name}
       >
-        {props.icon && props.icon}
-        <Field
-          className="w-full outline-none"
-          name={props.name}
-          type={props.type}
-        />
-      </div>
-      <ErrorMessage
-        component="div"
+        <span className="uppercase">{props.label}</span>
+        {error && <> - {error}</>}
+      </label>
+      <Field
         className={classNames(
-          "flex",
-          "w-full",
-          "items-center",
-          "-mt-3",
-          "mb-4",
-          "px-1",
-          "text-red",
-          "text-sm"
+          "w-full p-2.5 text-white border border-solid border-text-input-border bg-text-input-bg rounded-sm leading-none",
+          { "border-red": error }
         )}
         name={props.name}
+        type={props.type}
       />
-    </>
+    </div>
   );
 }
