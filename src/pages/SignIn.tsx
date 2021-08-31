@@ -22,9 +22,9 @@ export default function SignIn() {
   }, [signInUser]);
 
   return (
-    <div className="bg-primary">
+    <div className="bg-cardbg lg:bg-primary">
       <div className="container flex h-screen justify-center items-center max-w-md">
-        <Card className="p-8 text-white shadow-md">
+        <Card className="p-8 text-white lg:shadow-md">
           <h3 className="font-bold text-2xl mb-2">Login</h3>
           <p className="text-base">We are happy to se you again !</p>
           {signInError && <ErrorFeedback message={signInError.message} />}

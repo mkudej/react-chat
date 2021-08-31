@@ -27,9 +27,9 @@ export default function SignUp() {
   }, [signUpUser]);
 
   return (
-    <div className="bg-primary">
+    <div className="bg-cardbg lg:bg-primary">
       <div className="container flex h-screen justify-center items-center max-w-md">
-        <Card className="p-8 text-white shadow-md">
+        <Card className="p-8 text-white lg:shadow-md">
           <h3 className="font-bold text-2xl mb-5 text-center">
             Create an account
           </h3>
