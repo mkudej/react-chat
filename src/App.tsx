@@ -1,21 +1,16 @@
 import SignUp from "./pages/SignUp";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SignIn from "./pages/SignIn";
-import Profile from "./pages/Profile";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Chat from "./pages/Chat";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/signup">
-          <SignUp />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
-        <Route path="/">
-          <SignIn />
-        </Route>
+        <Route component={SignUp} path="/signup" />
+        <PrivateRoute component={Chat} path="/chat" />
+        <Route component={SignIn} path="/" />
       </Switch>
     </Router>
   );

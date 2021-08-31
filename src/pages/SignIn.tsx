@@ -17,7 +17,7 @@ export default function SignIn() {
 
   useEffect(() => {
     if (signInUser?.operationType === "signIn") {
-      history.push("/profile");
+      history.push("/chat");
     }
   }, [signInUser]);
 
